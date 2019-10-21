@@ -20,10 +20,11 @@ public:
 
     }
 
-    SHINee(int number_sectors){
-        boot_record = new BootRecord();
+    SHINee(unsigned int number_sectors){
+        boot_record = new BootRecord(number_sectors);
         bitmap = new Bitmap();
         root = new Root();
+
 
     }
 

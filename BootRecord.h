@@ -1,5 +1,6 @@
 #ifndef BOOTRECORD_H_INCLUDED
 #define BOOTRECORD_H_INCLUDED
+#include <math.h>
 
 using namespace std;
 
@@ -15,6 +16,18 @@ class BootRecord{
 public:
 
     BootRecord(int number_sectors){
+        bytes_per_sector = 512;
+        sectors_per_cluster = 1;
+        max_root_entries = 32;
+        total_sectors_number = number_sectors;
+
+        long double aux = ceil(((long double)number_sectors/8)/512);
+        bitmap_number_sectors = (unsigned short int ) aux;
+
+        reserved_sectors = 1+bitmap_number_sectors+(max_root_entries/16);
+        cout << reserved_sectors << endl
+        << aux <<endl
+        << aux;
 
     }
 
