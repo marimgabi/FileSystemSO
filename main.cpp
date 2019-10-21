@@ -1,10 +1,11 @@
 #include <iostream>
-#include "SHINee.cpp"
+#include "SHINee.h"
+#include "ControllerFS.h"
 
-using namespace std;
+///using namespace std;
 
-int main()
-{
-    cout << "Hello world!" << endl;
+int main(){
+    ControllerFS *controller = new ControllerFS();
+    controller->FunctionCaller("new format cocozinho");
     return 0;
 }
