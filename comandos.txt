@@ -1,0 +1,4 @@
+LISTA DE COMANDOS
+
+->"new format caminho_absoluto" 
+formatar dispositivo/arquivo
