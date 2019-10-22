@@ -25,8 +25,13 @@ public:
             }
             unsigned long ul = std::stoul (arr[3],nullptr,10);
             path = arr[2];
-            shinee = new SHINee(ul);
-            gravaTudo();
+            if(ul>268419072){
+                cout << "O numero maximo de setores suportado e de 268419072" << endl;
+            }else{
+                shinee = new SHINee(ul);
+                gravaTudo();
+            }
+
         }
 
     }
