@@ -6,6 +6,6 @@
 
 int main(){
     ControllerFS *controller = new ControllerFS();
-    controller->FunctionCaller("new format cocozinho 4294967295");
+    controller->FunctionCaller("new format out/teste.shy 100");
     return 0;
 }
