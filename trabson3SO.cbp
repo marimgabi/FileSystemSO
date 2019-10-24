@@ -32,12 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Bitmap.cpp" />
-		<Unit filename="BootRecord.cpp" />
-		<Unit filename="Root.cpp" />
-		<Unit filename="RootEntry.cpp" />
-		<Unit filename="SHINee.cpp" />
-		<Unit filename="Setor.cpp" />
+		<Unit filename="Bitmap.h" />
+		<Unit filename="BootRecord.h" />
+		<Unit filename="ControllerFS.h" />
+		<Unit filename="Root.h" />
+		<Unit filename="RootEntry.h" />
+		<Unit filename="SHINee.h" />
+		<Unit filename="Setor.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
