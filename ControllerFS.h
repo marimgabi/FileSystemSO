@@ -47,6 +47,18 @@ public:
                 gravaTudo();
             }
 
+        }else if(command.find("open") != string::npos){
+
+        }else if(command.find("help") != string::npos){
+            cout << "Para formatar:"
+            << "'new format caminho_absoluto numero_de_setores'" << endl << endl;
+            cout << "Para abrir arquivo/dispositivo:"
+            << "'open caminho_absoluto'" << endl << endl;
+
+            cout << "Para sair: 'exit'" << endl;
+
+        }else{
+            cout << "Comando errado";
         }
 
     }
