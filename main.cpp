@@ -6,7 +6,7 @@
 
 int main(){
     ControllerFS *controller = new ControllerFS();
-    controller->FunctionCaller("new format out/teste.shy 10");
+    controller->FunctionCaller("new format out/teste.shy 10000000");
 
 //    cout << "Para acessar a lista de comando digite 'help'" << endl;
 //    string line;
