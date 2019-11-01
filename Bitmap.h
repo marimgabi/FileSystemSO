@@ -5,7 +5,7 @@
 ///using namespace std;
 
 class Bitmap{
-    vector<char> bitmap;
+    vector<unsigned char> bitmap;
 public:
 
 Bitmap(){
@@ -18,9 +18,10 @@ Bitmap(unsigned int number_total_sectors, unsigned short int bitmap_number_secto
     int bits_escritos;
 
     ///preenche td com 0
-    for(int i=0;i<bytes_validos;i++){
+    for(int i=0;i<bitmap_number_sectors*512;i++){
         bitmap.push_back(0x00);
     }
+
     unsigned char mascara;
     bits_escritos = 0;
 
@@ -34,7 +35,16 @@ Bitmap(unsigned int number_total_sectors, unsigned short int bitmap_number_secto
             cont++;
         }
     }
-
+    ///Preenche os bits relativos a setores não existentes
+    cont=number_total_sectors/8;
+    for(int i=number_total_sectors%8;i<8;i++){
+        mascara=1;
+        mascara<<=i;
+        bitmap[cont]=bitmap[cont]|mascara;
+    }
+    for(int i=cont+1;i<bitmap_number_sectors*512;i++){
+        bitmap[i]=0xff;
+    }
 
 }
 
