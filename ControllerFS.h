@@ -79,8 +79,13 @@ public:
         ///Grava informações do boot record
         ///fseek(arq, 0, SEEK_SET);
         fwrite(&boot_record, sizeof(bootRecord), 1, arq);
+        for(int i=0;i<shinee->getBitmap()->getBitmap().size();i++){
+            fwrite(&shinee->getBitmap()->getBitmap()[i],sizeof(unsigned char),1,arq);
+        }
 
         fclose (arq);
+
+
     }
 
     void preencheBootRecord(bootRecord &boot){

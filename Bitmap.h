@@ -6,6 +6,7 @@
 
 class Bitmap{
     vector<unsigned char> bitmap;
+    unsigned int number_sectors;
 public:
 
 Bitmap(){
@@ -16,6 +17,7 @@ Bitmap(unsigned int number_total_sectors, unsigned short int bitmap_number_secto
     unsigned int bytes_validos;
     bytes_validos = ceil((double)number_total_sectors/8);
     int bits_escritos;
+    number_sectors=number_total_sectors;
 
     ///preenche td com 0
     for(int i=0;i<bitmap_number_sectors*512;i++){
@@ -46,14 +48,61 @@ Bitmap(unsigned int number_total_sectors, unsigned short int bitmap_number_secto
         bitmap[i]=0xff;
     }
 
+    fillSector(89);
+    freeSector(89);
 }
 
-void fillSector(int num_sector){
+vector<unsigned char> getBitmap(){
+    return bitmap;
+}
+
+void fillSector(unsigned int num_sector){
+    unsigned int byte_to_change;
+    unsigned char mascara;
+    byte_to_change=num_sector/8;
+    mascara=1;
+    mascara<<=num_sector%8;
+    bitmap[byte_to_change]=bitmap[byte_to_change]|mascara;
+}
+
+void freeSector(unsigned int num_sector){
+    unsigned int byte_to_change;
+    unsigned char mascara;
+
+    byte_to_change=num_sector/8;
+    bitmap[byte_to_change] = bitmap[byte_to_change] & (~(1<<num_sector%8));
 
 }
 
-void freeSector(int num_sector){
+bool isFree(unsigned int num_sector){
+    /// & com 1 no bit desejado
+    unsigned int byte_to_change;
+    unsigned char mascara;
 
+    byte_to_change=num_sector/8;
+    mascara=1;
+    mascara<<=num_sector%8;
+    if((bitmap[byte_to_change]&mascara)==0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+unsigned int findFreeSectors(unsigned int quantidade){
+    unsigned int inicio=-1;
+    int cont=0,i=0;
+
+    while(cont<quantidade){
+        if(isFree(i)){
+            cont++;
+        }else{
+            cont=0;
+        }
+        i++;
+    }
+    inicio=i-quantidade;
+    return inicio;
 }
 
 };
