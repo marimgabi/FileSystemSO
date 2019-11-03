@@ -33,7 +33,7 @@ public:
     }
 
     void setFormatting_state(unsigned char _state){
-
+        formatting_state=_state;
     }
 
     unsigned short int getBitmap_number_sectors(){

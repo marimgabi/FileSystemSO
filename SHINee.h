@@ -23,7 +23,7 @@ public:
     SHINee(unsigned int number_sectors){
         boot_record = new BootRecord(number_sectors);
         bitmap = new Bitmap(number_sectors,boot_record->getBitmap_number_sectors(), boot_record->getReserved_sectors());
-        root = new Root();
+        root = new Root(32);
 
 
     }

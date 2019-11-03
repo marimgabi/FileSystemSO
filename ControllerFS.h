@@ -2,6 +2,7 @@
 #define CONTROLLERFS_H_INCLUDED
 #include <sstream>
 #include <stdio.h>
+#include "RootEntry.h"
 
 #pragma pack(1)
 typedef struct bootRecord{
@@ -64,7 +65,7 @@ public:
     }
 
     void gravaTudo(){
-        FILE *arq;
+        FILE *arq, *arq1;
         const char * c = path.c_str();
         arq = fopen(c, "wb");
         if (arq == NULL){
@@ -79,13 +80,29 @@ public:
         ///Grava informações do boot record
         ///fseek(arq, 0, SEEK_SET);
         fwrite(&boot_record, sizeof(bootRecord), 1, arq);
+        ///Grava informações do bitmap
+        //printf("%x",shinee->getBitmap()->getBitmap()[11]);
         for(int i=0;i<shinee->getBitmap()->getBitmap().size();i++){
             fwrite(&shinee->getBitmap()->getBitmap()[i],sizeof(unsigned char),1,arq);
         }
+        unsigned char temp=0x00;
+        for(int i=shinee->getBoot_record()->getBitmap_number_sectors()+1;i<shinee->getBoot_record()->getTotal_sectors_number();i++){
+            for(int j=0;j<512;j++){
+                fwrite(&temp,sizeof(unsigned char),1,arq);
+            }
+        }
+        shinee->getBoot_record()->setFormatting_state(0x00);
 
-        fclose (arq);
+        fclose(arq);
 
-
+        arq1 = fopen(c, "r+b");
+        fseek(arq1, 13, SEEK_SET);
+        unsigned char teste=0;
+        ///fgets(&teste, 1, arq);
+        ///fread(&teste, sizeof(unsigned char), 1,arq1);
+        fwrite(&teste,sizeof(unsigned char),1,arq1);
+        ///printf("%x",teste);
+        fclose(arq1);
     }
 
     void preencheBootRecord(bootRecord &boot){

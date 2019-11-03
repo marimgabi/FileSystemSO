@@ -44,12 +44,10 @@ Bitmap(unsigned int number_total_sectors, unsigned short int bitmap_number_secto
         mascara<<=i;
         bitmap[cont]=bitmap[cont]|mascara;
     }
+
     for(int i=cont+1;i<bitmap_number_sectors*512;i++){
         bitmap[i]=0xff;
     }
-
-    fillSector(89);
-    freeSector(89);
 }
 
 vector<unsigned char> getBitmap(){
